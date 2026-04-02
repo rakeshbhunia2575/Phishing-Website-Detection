@@ -1,0 +1,9 @@
+flask
+python-dotenv
+pymongo
+dnspython
+numpy
+pandas
+scikit-learn
+tldextract
+gunicorn
