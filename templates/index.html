@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Scan a website address and check whether it looks safe or suspicious." />
+    <title>LinkWatch | Phishing Detection</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    <main class="page-shell">
+      <nav class="topbar" aria-label="Primary navigation">
+        <a class="brand" href="/" aria-label="LinkWatch home">
+          <span class="brand-mark" aria-hidden="true">↗</span>
+          <span>LinkWatch</span>
+        </a>
+        <span class="nav-status"><span class="status-dot"></span> Scanner online</span>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> Digital safety, made visible</p>
+          <h1>Know what’s<br /><em>behind the link.</em></h1>
+          <p class="intro">Check a website address before you click. LinkWatch looks for signals commonly associated with phishing and suspicious websites.</p>
+          <div class="trust-row">
+            <span><strong>01</strong> Paste a URL</span>
+            <span><strong>02</strong> Get a clear signal</span>
+          </div>
+        </div>
+
+        <div class="scan-panel">
+          <div class="panel-heading">
+            <div><p class="panel-kicker">Quick scan</p><h2>Inspect a website</h2></div>
+            <span class="shield-icon" aria-hidden="true">✦</span>
+          </div>
+
+          <form method="POST" action="/predict">
+            <label for="url">Website address</label>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">⌁</span>
+              <input id="url" type="text" name="url" placeholder="example.com or paste a full URL" autocomplete="url" required />
+            </div>
+            <button type="submit" class="scan-button"><span>Run security check</span><span class="button-arrow" aria-hidden="true">→</span></button>
+          </form>
+          <p class="privacy-note"><span aria-hidden="true">⌁</span> Your scan is private and takes a moment.</p>
+        </div>
+      </section>
+
+      {% if prediction %}
+      <div
+        id="resultBox"
+        class="result {% if 'Phishing' in prediction %}phishing{% else %}legit{% endif %}"
+      >
+        <span class="result-icon" aria-hidden="true">{% if 'Phishing' in prediction %}!{% else %}✓{% endif %}</span>
+        <span class="result-content"><span class="result-label">Scan result</span><strong>{{ prediction }}</strong></span>
+      </div>
+
+      {% if reasons or notes %}
+      <div class="scan-detail">
+        {% if reasons %}
+        <p class="scan-detail-title">Signals found</p>
+        <ul class="scan-reasons">
+          {% for reason in reasons %}<li>{{ reason }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        {% if notes %}
+        <ul class="scan-notes">
+          {% for note in notes %}<li>{{ note }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        {% if tier == 'lexical' %}
+        <p class="scan-notes">Limited scan: URL only.</p>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endif %}
+
+      <button type="button" class="toggle-btn" onclick="toggleHistory()" aria-expanded="false" aria-controls="historyBox">
+        <span class="history-button-icon" aria-hidden="true">◷</span><span>Scan history</span><span class="toggle-chevron" aria-hidden="true">⌄</span>
+      </button>
+
+      <div class="history" id="historyBox" style="display: none">
+        {% if history and history|length > 0 %}
+        <div class="history-heading"><span>Recent checks</span><span class="history-count">{{ history|length }} scan{% if history|length != 1 %}s{% endif %}</span></div>
+        <div class="table-wrap"><table>
+          <thead><tr><th>Website</th><th>Assessment</th><th>Checked (UTC)</th></tr></thead>
+          <tbody>{% for item in history %}<tr>
+            <td class="url-cell">{{ item["url"] }}</td>
+            <td><span class="table-result {% if 'Phishing' in item['result'] %}is-risk{% else %}is-safe{% endif %}">{{ item["result"] }}</span></td>
+            <td class="time-cell">{{ item["timestamp"] }}</td>
+          </tr>{% endfor %}</tbody>
+        </table></div>
+        {% else %}
+        <div class="empty-history"><span class="empty-icon" aria-hidden="true">◷</span><p>No scans yet</p><span>Your recent checks will appear here.</span></div>
+        {% endif %}
+      </div>
+      <footer>LinkWatch <span>•</span> A simple first line of defense against deceptive links.</footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    {% if prediction %}
+    <script>
+      //  Auto-scroll to prediction result
+      document.getElementById("resultBox").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    </script>
+    {% endif %}
+  </body>
+</html>
