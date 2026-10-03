@@ -110,9 +110,3 @@ Phishing-Website-Detection/
 - No secrets are stored in the repository. Use environment variables.
 - Use a dedicated database user with permissions on this database only, and a strong, unique password.
 - The FastAPI service is reachable on the internet when deployed this way. For anything beyond a demo, add authentication between the two services.
-
-## License
-
-Copyright (c) 2026 PhishyLink. All rights reserved.
-
-Replace this section with your chosen licence (for example MIT) if you want others to use or contribute to the code.
