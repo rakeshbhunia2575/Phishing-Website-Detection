@@ -75,7 +75,7 @@ Phishing-Website-Detection/
 │   ├── pom.xml
 │   ├── mvnw, mvnw.cmd, .mvn/
 │   └── src/main/
-│       ├── java/com/LinkSentry/PhishingWebsiteDetection/
+│       ├── java/com/PhishyLink/PhishingWebsiteDetection/
 │       │   ├── PhishingWebsiteDetectionApplication.java
 │       │   ├── controller/      PredictionController
 │       │   ├── dto/             RequestDto, ResponseDto
