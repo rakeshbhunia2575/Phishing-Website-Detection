@@ -1,5 +1,5 @@
 
-# PhishyLink: Phishing Website Detection
+# PhishyLink: Phishing Website Detection  [![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20PhishyLink-1F4A9E?style=for-the-badge)](https://phishing-website-detection-ym5d.onrender.com)
 
 PhishyLink checks a web link for signs of phishing before you click it. Paste a URL into the web page and you get a verdict (**Phishing Website** or **Legitimate Website**), the main reason, notes about how reliable the check was, and a plain-language message telling you what to do. Every check is saved, and the page shows your recent checks in a dropdown.
 
