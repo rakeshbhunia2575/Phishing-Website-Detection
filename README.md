@@ -1,5 +1,9 @@
 
-# PhishyLink: Phishing Website Detection  [![PhishyLink live demo](./assets/live-demo-badge.svg)](https://phishing-website-detection-ym5d.onrender.com/)
+# PhishyLink: Phishing Website Detection  [![Live Demo](https://img.shields.io/badge/Live_Demo-PhishyLink-1D898A?style=for-the-badge&logo=render&logoColor=white)](https://phishing-website-detection-ym5d.onrender.com/)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-1F4A9E?style=for-the-badge&logo=springboot&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-139A8A?style=for-the-badge&logo=fastapi&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-254C83?style=for-the-badge&logo=mysql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-1D898A?style=for-the-badge&logo=docker&logoColor=white)
 
 PhishyLink checks a web link for signs of phishing before you click it. Paste a URL into the web page and you get a verdict (**Phishing Website** or **Legitimate Website**), the main reason, notes about how reliable the check was, and a plain-language message telling you what to do. Every check is saved, and the page shows your recent checks in a dropdown.
 
