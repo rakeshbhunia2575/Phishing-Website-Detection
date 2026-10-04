@@ -1,0 +1,15 @@
+name: keep-alive
+
+on:
+  schedule:
+    - cron: "*/10 4-12 * * *"   # every 10 minutes, 04:00-12:50 UTC
+  workflow_dispatch:             # lets you run it by hand
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Spring Boot (also touches the database)
+        run: curl -fsS -m 90 https://phishing-website-detection-ym5d.onrender.com/api/predict > /dev/null || true
+      - name: Ping FastAPI
+        run: curl -fsS -m 90 https://phishylink-model.onrender.com/health > /dev/null || true
